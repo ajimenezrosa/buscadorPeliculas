@@ -21,13 +21,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1>Buscar Peliculas</h1> 
-                    <form id="buscarPelicula">
-                        <input type="text" class="form-control" placeholder="Buscar Pelicula">
+                    <form id="formBuscar">
+                        <input type="text" id="textBuscar" class="form-control" placeholder="Buscar Pelicula">
                     </form>
                 </div>
                 
             </div>
-            <div id="peliculas" class="row"></div>
+            <div id="peliculas" class="row container"></div>
 
         </div>
 
@@ -35,19 +35,27 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
 
+            var form = document.getElementById("formBuscar");
+            
+            form.addEventListener("submit",function(event){
+                var texto = document.getElementById("textBuscar").value;
+                console.log("texto: ",texto);
+                getPeliculas(texto);
+                event.preventDefault();
+            });
 
-            function getPeliculas(){
+            function getPeliculas(texto){
                 let output = '';
-                axios.get('http://localhost:8081/movies/potter')
+                axios.get('http://localhost:8081/movies/'+texto)
                 .then(function (response) {
                     let data = response.data;
                     console.log(data);
                     for(let i=0;i<data.length;i++){
                         let movie = data[i];
                         output += `
-                            <div class="card col-md-3">
+                            <div class="card col-md-3  align-items-center">
                                 <img class="card-img-top" src="${movie.img}" alt="Card image cap">
-                                <div class="card-body">
+                                <div class="card-body text-center">
                                     <h4 class="card-title">${movie.title}</h4>${movie.anio}
                                     <p class="card-text">${movie.ratings}</p>
                                     <a href="http://www.imdb.com/title/${movie.id}/?ref_=adv_li_i" class="btn btn-primary">Detalles</a>

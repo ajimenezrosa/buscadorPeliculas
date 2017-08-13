@@ -69,7 +69,8 @@ app.get('/movies/:q', function(req, res){
 
                 var img =  $('.lister-item-image img', data).attr('loadlate');
                 var imgURL = img.split(".");
-                imgURL[3] = "._V1_UX182_CR0,0,182,268_AL_.jpg";
+                imgURL[3] = "_V1_SY1000_CR0,0,690,1000_AL_.jpg";//"._V1_UX182_CR0,0,182,268_AL_.jpg";
+                //_V1_SY1000_CR0,0,690,1000_AL_.jpg
                 img = imgURL.join(".");
                 
                 var anio = $('.lister-item-year', data).text();//lister-item-year 

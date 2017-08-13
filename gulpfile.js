@@ -11,6 +11,7 @@ gulp.task('server', function () {
     });
 
     gulp.watch("*.html").on("change", reload);
+    gulp.watch("css/*.css").on("change", reload);
 
 });
 
