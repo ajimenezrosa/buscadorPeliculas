@@ -2,7 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
-var app     = express();
+var app = express();
 var cors = require('cors')
 
  
@@ -58,10 +58,7 @@ app.get('/movies/:q', function(req, res){
     var url = 'http://www.imdb.com/search/title?title='+q+'&view=simple';
     request(url, function(error, response, html){
 
-        // First we'll check to make sure no errors occurred when making the request
-
         if(!error){
-            // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
 
             var $ = cheerio.load(html);
 
@@ -89,14 +86,7 @@ app.get('/movies/:q', function(req, res){
                });
                 
             });
-            /*
-            fs.writeFile('output.json', JSON.stringify(movies, null, 4), function(err){
 
-                console.log('File successfully written! - Check your project directory for the output.json file');
-
-            });
-            */
-            
             res.send( JSON.stringify(movies))
         }
     });

@@ -9,39 +9,60 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        
+        <div id="main" class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Buscar Peliculas</h1> 
+                    <form id="buscarPelicula">
+                        <input type="text" class="form-control" placeholder="Buscar Pelicula">
+                    </form>
+                </div>
+                
+            </div>
+            <div id="peliculas" class="row"></div>
 
-        <div id="main"></div>
+        </div>
 
 
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
-            let output = '';
-            axios.get('http://localhost:8081/movies/potter')
-            .then(function (response) {
-                let data = response.data;
-                console.log(data);
-                for(let i=0;i<data.length;i++){
-                    let movie = data[i];
-                    output += `
-                        <div>
-                            <h2>${movie.title}</h2>${movie.anio}
-                            <img src="${movie.img}">
-                            <p><strong>Ratings:</strong> ${movie.ratings}</p>
-                            <a href="http://www.imdb.com/title/${movie.id}/?ref_=adv_li_i">Detalles imbd</a>
-                        </div>
-                    `;
-                };
-                document.getElementById('main').innerHTML = output;
-                
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+
+
+            function getPeliculas(){
+                let output = '';
+                axios.get('http://localhost:8081/movies/potter')
+                .then(function (response) {
+                    let data = response.data;
+                    console.log(data);
+                    for(let i=0;i<data.length;i++){
+                        let movie = data[i];
+                        output += `
+                            <div class="card col-md-3">
+                                <img class="card-img-top" src="${movie.img}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h4 class="card-title">${movie.title}</h4>${movie.anio}
+                                    <p class="card-text">${movie.ratings}</p>
+                                    <a href="http://www.imdb.com/title/${movie.id}/?ref_=adv_li_i" class="btn btn-primary">Detalles</a>
+                                </div>
+                            </div>
+                        `;
+                    };
+                    document.getElementById('peliculas').innerHTML = output;
+                    
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            
 
         </script>
     </body>
