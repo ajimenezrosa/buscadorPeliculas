@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="main"></div>
+
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            let output = '';
+            axios.get('http://localhost:8081/movies/potter')
+            .then(function (response) {
+                let data = response.data;
+                console.log(data);
+                for(let i=0;i<data.length;i++){
+                    let movie = data[i];
+                    output += `
+                        <div>
+                            <h2>${movie.title}</h2>${movie.anio}
+                            <img src="${movie.img}">
+                            <p><strong>Ratings:</strong> ${movie.ratings}</p>
+                            <a href="http://www.imdb.com/title/${movie.id}/?ref_=adv_li_i">Detalles imbd</a>
+                        </div>
+                    `;
+                };
+                document.getElementById('main').innerHTML = output;
+                
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        </script>
+    </body>
+</html>
