@@ -5,12 +5,13 @@ var cheerio = require('cheerio');
 var app = express();
 var cors = require('cors')
 
- 
 app.use(cors());
 
-
-
-
+/* 
+* Obtener datos de pelicula en base a un id de imbd 
+* @param {String} q         texto a buscar
+* @returns {array} elarray de json con peliculas
+*/
 app.get('/movie/:Id', function(req, res){
     var movies = [];
     var id =  req.params.Id;
@@ -59,6 +60,11 @@ app.get('/movie/:Id', function(req, res){
     });
 });
 
+/* 
+* Obtener datos de peliculas en base a una busqueda realizada en imdb 
+* @param {String} q         texto a buscar
+* @returns {array} elarray de json con peliculas
+*/
 app.get('/movies/:q', function(req, res){
     var movies = [];
     var q =  req.params.q;
