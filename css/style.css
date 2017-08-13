@@ -1,9 +1,13 @@
-.card{
-    background:#252525;
-    /* padding:5px;
-    margin:2px; */
-} 
 
-.card img{
-    width: 100%
+#pelicula img{
+    width: 100%;
+}
+
+#peliculas .col-md-3 .well{
+    height: 450px;
+}
+
+
+#peliculas .col-md-3 img{
+
 }
